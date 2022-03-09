@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+            .selected {
+                color: green;
+            }
+            .notpresent {
+                color: red;
+            }
+            </style>
+    </head>
+  <body>
+    <table style="width: 100%">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>City</th>
+        <th>Profession</th>
+        <th>Select</th>
+        <th>Delete</th>
+      </tr>
+
+      <% users.forEach( user => { %> 
+      <% if(user.selected == 1) { %>
+      <tr class="selected">
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.age %></td>
+        <td><%= user.city %></td>
+        <td><%= user.profession %></td>
+        <td>
+          <form action="/user/<%= user._id%>?_method=PUT" method="POST">
+            <button type="submit">Select</button>
+          </form>
+        </td>
+        <td>
+          <form action="/user/<%= user._id%>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% } else if(!user.selected) {%>
+      <tr class="notpresent">
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.age %></td>
+        <td><%= user.city %></td>
+        <td><%= user.profession %></td>
+        <td>
+          <form action="/user/<%= user._id%>?_method=PUT" method="POST">
+            <button type="submit">Select</button>
+          </form>
+        </td>
+        <td>
+          <form action="/user/<%= user._id%>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <%} else {%>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.age %></td>
+        <td><%= user.city %></td>
+        <td><%= user.profession %></td>
+        <td>
+          <form action="/user/<%= user._id%>?_method=PUT" method="POST">
+            <button type="submit">Select</button>
+          </form>
+        </td>
+        <td>
+          <form action="/user/<%= user._id%>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <%}%> <% })%>
+    </table>
+    <a href="/form"> Add user </a>
+  </body>
+</html>
